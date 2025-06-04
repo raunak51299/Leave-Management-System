@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave & Attendance Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .endpoint-group {
+            margin-bottom: 25px;
+        }
+        
+        .endpoint-group h3 {
+            color: #555;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .endpoint {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .method {
+            font-weight: bold;
+            margin-right: 15px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.8em;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .get { background-color: #28a745; }
+        .post { background-color: #007bff; }
+        .put { background-color: #ffc107; color: #333; }
+        .delete { background-color: #dc3545; }
+        
+        .path {
+            font-family: 'Courier New', monospace;
+            color: #666;
+            margin-right: 15px;
+            flex: 1;
+        }
+        
+        .description {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .database-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .db-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .db-item strong {
+            color: #764ba2;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .db-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .db-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #28a745;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Leave & Attendance Management System</h1>
+            <p>RESTful API for managing employee leave requests and attendance records</p>
+            <div class="status">✅ System Online</div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 API Endpoints</h2>
+            
+            <div class="endpoint-group">
+                <h3>👥 Employee Management</h3>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/employees</span>
+                    <span class="description">Get all employees</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/employees</span>
+                    <span class="description">Create new employee</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/employees/{id}</span>
+                    <span class="description">Get employee by ID</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method put">PUT</span>
+                    <span class="path">/api/employees/{id}</span>
+                    <span class="description">Update employee</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method delete">DELETE</span>
+                    <span class="path">/api/employees/{id}</span>
+                    <span class="description">Delete employee</span>
+                </div>
+            </div>
+            
+            <div class="endpoint-group">
+                <h3>🏖️ Leave Management</h3>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/employees/{empId}/leaves</span>
+                    <span class="description">Get leaves for employee</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/employees/{empId}/leaves</span>
+                    <span class="description">Submit leave request</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method put">PUT</span>
+                    <span class="path">/api/employees/{empId}/leaves/{leaveId}/approve</span>
+                    <span class="description">Approve leave request</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method put">PUT</span>
+                    <span class="path">/api/employees/{empId}/leaves/{leaveId}/reject</span>
+                    <span class="description">Reject leave request</span>
+                </div>
+            </div>
+            
+            <div class="endpoint-group">
+                <h3>⏰ Attendance Management</h3>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/employees/{empId}/attendance</span>
+                    <span class="description">Get attendance records</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/employees/{empId}/attendance/checkin</span>
+                    <span class="description">Employee check-in</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method put">PUT</span>
+                    <span class="path">/api/employees/{empId}/attendance/{id}/checkout</span>
+                    <span class="description">Employee check-out</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🗄️ Database Information</h2>
+            <div class="database-info">
+                <div class="db-item">
+                    <strong>H2 Console:</strong>
+                    <a href="/h2-console" target="_blank">/h2-console</a>
+                </div>
+                <div class="db-item">
+                    <strong>JDBC URL:</strong>
+                    <code>jdbc:h2:mem:leaveattendancedb</code>
+                </div>
+                <div class="db-item">
+                    <strong>Username:</strong>
+                    <code>sa</code>
+                </div>
+                <div class="db-item">
+                    <strong>Password:</strong>
+                    <code>(empty)</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
